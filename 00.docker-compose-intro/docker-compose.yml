@@ -1,0 +1,9 @@
+version: "2"
+
+services:
+  echoserver:
+    image: inanimate/echo-server
+    #image: gcr.io/google_containers/echoserver:1.10
+    ports:
+      - "8080:8080"
+    mem_limit: 128M

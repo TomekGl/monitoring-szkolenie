@@ -1,0 +1,21 @@
+---
+groups:
+- name: Alerty
+  rules:
+  - alert: HostOutOfDiskSpace
+    expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 5 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: Host out of disk space (instance {{ $labels.instance }})
+      description: "Disk is almost full (< 5% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  - alert: pushgateway_down
+    expr: absent(container_memory_usage_bytes{name="pushgateway"})
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "PushGateway down"
+      description: "PushGateway container is down for more than 30 seconds."
