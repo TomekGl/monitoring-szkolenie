@@ -18,7 +18,7 @@ services:
   mynginx:
     image: nginx
     ports:
-      - "8080:8080"
+      - "8080:80"
     mem_limit: 100M
     environment:
       NGINX_HOST: foo.com

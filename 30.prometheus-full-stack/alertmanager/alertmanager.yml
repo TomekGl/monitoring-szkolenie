@@ -5,5 +5,8 @@ route:
   receiver: 'webhook'
 
 receivers:
-- name: 'webhook'
-  url: http://nginx:8001/
+  - name: 'webhook'
+    webhook_configs:
+      - http_config:
+        send_resolved: false
+        url: "http://nginx/"
